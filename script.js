@@ -102,7 +102,7 @@ L.marker([41.7646, -72.6823], {icon: starIcon}).addTo(map);
 
 
 // load GeoJSON point data and clickable circles from local directory
-$.getJSON("src/points.geojson", function (data){
+$.getJSON("src/Airports464.geojson", function (data){
   var geoJsonLayer = L.geoJson(data, {
     pointToLayer: function( feature, latlng) {
       var circle = L.circleMarker(latlng, {
@@ -121,7 +121,7 @@ $.getJSON("src/points.geojson", function (data){
 });
 
 // load GeoJSON point data and clickable icons from local directory, using jQuery function (symbolized by $)
-$.getJSON("src/points.geojson", function (data){
+$.getJSON("src/Airports464.geojson", function (data){
   var iconStyle = L.icon({
     iconUrl: "src/hospital-18.png",
     iconRetinaUrl: 'src/hospital-18@2x.png',
