@@ -9,10 +9,6 @@ var map = L.map('map', {
   scrollWheelZoom: false
 });
 
-// optional : customize link to view source code; add your own GitHub repository
-map.attributionControl
-.setPrefix('View <a href="http://github.com/jackdougherty/leaflet-map">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
-
 L.Control.geocoder({position: "topleft"}).addTo(map);
 
 L.control.scale().addTo(map);
@@ -30,12 +26,6 @@ var controlLayers = L.control.layers( null, null, {
   collapsed: false // false = open by default
 }).addTo(map);
 
-// optional Coordinate Control for map construction
-var c = new L.Control.Coordinates();
-c.addTo(map);
-map.on('click', function(e) {
-	c.setCoordinates(e);
-});
 
 /* BASELAYERS */
 // use common baselayers below, delete, or add more with plain JavaScript from http://leaflet-extras.github.io/leaflet-providers/preview/
@@ -63,23 +53,12 @@ var aerial1934 = new L.tileLayer.wms("http://geoserver.lib.uconn.edu:8080/geoser
 });
 controlLayers.addBaseLayer(aerial1934, 'CT Aerial 1934');
 
-// tileLayer.WMS as a baselayer - see http://leafletjs.com/reference.html#tilelayer-wms
-// UConn MAGIC WMS settings (currently http, not https) - see http://geoserver.lib.uconn.edu:8080/geoserver/web/?wicket:bookmarkablePage=:org.geoserver.web.demo.MapPreviewPage
-var hartfordCounty1855 = new L.tileLayer.wms("http://geoserver.lib.uconn.edu:8080/geoserver/MAGIC/wms?", {
-  layers: 'MAGIC:HartfordCounty_Woodford_1855',
-  attribution: '1855 <a href="http://magic.library.uconn.edu">MAGIC UConn</a>'
-});
-controlLayers.addBaseLayer(hartfordCounty1855, 'Hartford County 1855');
-
-var map1842wms = new L.tileLayer.wms("http://maps.nypl.org/warper/maps/wms/7363?", {
-  attribution: '1842 <a href="http://maps.nypl.org/warper/">NYPL Map Warper</a>'
-});
-controlLayers.addBaseLayer(map1842wms, '1842 NYPL WMS');
-
-var map1842tile = new L.tileLayer("http://mapwarper.net/maps/tile/14781/{z}/{x}/{y}.png", {
-  attribution: '1842 <a href="http://maps.nypl.org/warper/">NYPL Map Warper</a>'
-});
-controlLayers.addBaseLayer(map1842tile, '1842 NYPL Tile');
+var StamenTerrain = L.tileLayer(
+	'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png', 
+	{
+		attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+	}
+)
 
 /* POINT OVERLAYS */
 // ways to load point map data from different sources: coordinates in the code, GeoJSON in local directory, remote GeoJSON and JSON
