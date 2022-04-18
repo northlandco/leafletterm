@@ -13,9 +13,6 @@ L.Control.geocoder({position: "topleft"}).addTo(map);
 
 L.control.scale().addTo(map);
 
-// optional Zoom Label for map construction
-L.control.zoomLabel({position: "topright"}).addTo(map);
-
 // Reposition zoom control other than default topleft
 L.control.zoom({position: "topright"}).addTo(map);
 
